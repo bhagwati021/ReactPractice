@@ -16,7 +16,7 @@ function App() {
     if (numberAllowed) str+="1234567890 "
     if (charAllowed) str+="@#$%^&*()!+=?/<>~` "
 
-    for (let i = 0; i <= array.length; i++) {
+    for (let i = 0; i <= length; i++) {
       let char =Math.floor(Math.random() * str.length +1)
       pass = str.charAt(char)
       
@@ -26,8 +26,34 @@ function App() {
    } , [length,numberAllowed,charAllowed,setPassword])
   return (
     <>
-      <div className='w-full max-w-md mx-auto shadow-md rounded-lg px-4 my-8 text-orange-500 bg-gray-700 '>
-        test
+      <div className='w-full max-w-md mx-auto shadow-md rounded-lg px-4 my-8 text-orange-500 bg-gray-700  text-orange-500'>
+        <h1 className='text-white text-center my-3'>Password</h1>
+        <div className='flex shadow rounded-lg overflow-hidden mb-4'>
+          <input type='text' value={password}
+          className='outline-none w-full py1 px-3'
+          placeholder='Password'
+          readOnly />
+          <button className='outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0'
+          >copy</button>
+        </div>
+        <div className='flex text-sm gap-x-2'>
+          <div className='flex item-cemter gap-x-1'>
+            <input type='range' min={6} max={100} value={length} className='cursor-pointer' onChange={(e) => {setLength(e.target.value)}}/>
+            <label>Length:{length}</label>
+          </div>
+          <div className='flex item-cemter gap-x-1'>
+          <input type='checkbox' 
+                  defaultValue={numberAllowed}
+                  id='numberInput'
+                  onChange={() => {setNumbarAllowed((prev) => !prev);}} />
+                  <label htmlFor='numberInput'>Numbers</label>
+          </div>
+          <input type='checkbox' 
+                  defaultValue={charAllowed}
+                  id='characterInput'
+                  onChange={() => {setCharAllowed((prev) => !prev);}} />
+                  <label htmlFor='characterInput'>character</label>
+        </div>
       </div>
     </>
   );
